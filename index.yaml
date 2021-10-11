@@ -3,6 +3,32 @@ entries:
   guestbook:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2021-10-11T19:48:31.491727147Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.x.x
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 1.x.x
+    description: Guestbook is a simple cloud-native web application which allows visitors
+      to leave a public comment without creating a user account.
+    digest: d01c91b2f1e1aabaf0461656cf6cc521f00cbb5a2bbee7633b5a4b13c95bc464
+    home: https://github.com/jakuboskera/guestbook
+    maintainers:
+    - email: iam@jakuboskera.dev
+      name: jakuboskera
+    name: guestbook
+    sources:
+    - https://github.com/jakuboskera/guestbook
+    - https://guestbook.jakuboskera.dev
+    type: application
+    urls:
+    - https://github.com/jakuboskera/charts/releases/download/guestbook-0.1.2/guestbook-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2021-10-11T14:03:51.767228449Z"
     dependencies:
     - condition: postgresql.enabled
@@ -53,4 +79,4 @@ entries:
     urls:
     - https://github.com/jakuboskera/charts/releases/download/guestbook-0.1.0/guestbook-0.1.0.tgz
     version: 0.1.0
-generated: "2021-10-11T14:03:51.771953146Z"
+generated: "2021-10-11T19:48:31.491738547Z"
