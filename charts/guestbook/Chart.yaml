@@ -1,7 +1,7 @@
 apiVersion: v2
 type: application
 name: guestbook
-version: 0.1.0
+version: 0.1.1
 appVersion: 0.1.0
 description: Guestbook is a simple cloud-native web application which allows visitors to leave a public comment without creating a user account.
 engine: gotpl
