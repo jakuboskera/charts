@@ -282,7 +282,7 @@ postgresql:
     password: ""
   ## @param postgresql.existingSecret Use an existing secret file with the PostgreSQL password (can be used with the bundled chart or with an existing installation)
   ##
-  existingSecret: ""
+  existingSecret: "{{ .Release.Name }}-postgresql"
   ## @param postgresql.postgresqlDatabase Database name to be used by Guestbook
   ##
   postgresqlDatabase: guestbook
