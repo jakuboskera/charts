@@ -1,0 +1,33 @@
+{{/* vim: set filetype=mustache: */}}
+
+{{/*
+Set the http or https prefix
+*/}}
+{{- define "guestbook.ingressUrl" -}}
+{{- if .Values.ingress.tls -}}
+    {{- printf "https://%s" .Values.ingress.hostname -}}
+{{- else -}}
+    {{- printf "http://%s" .Values.ingress.hostname -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return the proper Guestbook image name
+*/}}
+{{- define "guestbook.image" -}}
+{{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
+{{- end -}}
+
+{{/*
+Return the proper image name for dbReadiness
+*/}}
+{{- define "guestbook.dbReadiness.image" -}}
+{{- include "common.images.image" ( dict "imageRoot" .Values.dbReadiness.image "global" .Values.global ) -}}
+{{- end -}}
+
+{{/*
+Return the proper Docker Image Registry Secret Names
+*/}}
+{{- define "guestbook.imagePullSecrets" -}}
+{{- include "common.images.pullSecrets" (dict "images" (list .Values.image .Values.dbReadiness.image) "global" .Values.global) -}}
+{{- end -}}

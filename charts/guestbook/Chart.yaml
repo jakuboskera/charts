@@ -1,0 +1,24 @@
+apiVersion: v2
+type: application
+name: guestbook
+version: 0.1.0
+appVersion: 0.1.0
+description: Guestbook is a simple cloud-native web application which allows visitors to leave a public comment without creating a user account.
+engine: gotpl
+home: https://github.com/jakuboskera/guestbook
+# TODO: add guestbook icon
+# icon:
+maintainers:
+- name: jakuboskera
+  email: iam@jakuboskera.dev
+sources:
+- https://github.com/jakuboskera/guestbook
+- https://guestbook.jakuboskera.dev
+dependencies:
+- condition: postgresql.enabled
+  name: postgresql
+  version: 10.x.x
+  repository: https://charts.bitnami.com/bitnami
+- name: common
+  version: 1.x.x
+  repository: https://charts.bitnami.com/bitnami

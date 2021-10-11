@@ -1,0 +1,436 @@
+{
+    "title": "Chart Values",
+    "type": "object",
+    "properties": {
+        "global": {
+            "type": "object",
+            "properties": {
+                "imageRegistry": {
+                    "type": "string",
+                    "default": "\"\"",
+                    "description": "Global Docker image registry"
+                },
+                "imagePullSecrets": {
+                    "type": "array",
+                    "default": "[]",
+                    "description": "Global Docker registry secret names as an array"
+                },
+                "storageClass": {
+                    "type": "string",
+                    "default": "\"\"",
+                    "description": "Global StorageClass for Persistent Volume(s)"
+                }
+            }
+        },
+        "kubeVersion": {
+            "type": "string",
+            "default": "\"\"",
+            "description": "Force target Kubernetes version (using Helm capabilities if not set)"
+        },
+        "nameOverride": {
+            "type": "string",
+            "default": "\"\"",
+            "description": "String to partially override guestbook.fullname template with a string (will prepend the release name)"
+        },
+        "fullnameOverride": {
+            "type": "string",
+            "default": "\"\"",
+            "description": "String to fully override guestbook.fullname template with a string"
+        },
+        "commonAnnotations": {
+            "type": "object",
+            "default": "{}",
+            "description": "Common annotations to add to all Guestbook resources (sub-charts are not considered). Evaluated as a template"
+        },
+        "commonLabels": {
+            "type": "object",
+            "default": "{}",
+            "description": "Common labels to add to all Guestbook resources (sub-charts are not considered). Evaluated as a template"
+        },
+        "clusterDomain": {
+            "type": "string",
+            "default": "cluster.local",
+            "description": "Kubernetes cluster domain"
+        },
+        "extraDeploy": {
+            "type": "array",
+            "default": "[]",
+            "description": "Array of extra objects to deploy with the release (evaluated as a template)."
+        },
+        "image": {
+            "type": "object",
+            "properties": {
+                "registry": {
+                    "type": "string",
+                    "default": "docker.io",
+                    "description": "Guestbook image registry"
+                },
+                "repository": {
+                    "type": "string",
+                    "default": "jakuboskera/guestbook",
+                    "description": "Guestbook image repository"
+                },
+                "tag": {
+                    "type": "string",
+                    "default": "v0.1.0",
+                    "description": "Guestbook image tag (immutable tags are recommended)"
+                },
+                "pullPolicy": {
+                    "type": "string",
+                    "default": "IfNotPresent",
+                    "description": "Guestbook image pull policy"
+                },
+                "pullSecrets": {
+                    "type": "array",
+                    "default": "[]",
+                    "description": "Specify image pull secrets"
+                }
+            }
+        },
+        "resources": {
+            "type": "object",
+            "properties": {
+                "requests": {
+                    "type": "object",
+                    "default": "{}",
+                    "description": "The requested resources for the container"
+                }
+            }
+        },
+        "networkPolicy": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable creation of NetworkPolicy resources. Only Ingress traffic is filtered for now."
+                }
+            }
+        },
+        "livenessProbe": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/disable the liveness probe"
+                },
+                "initialDelaySeconds": {
+                    "type": "number",
+                    "default": 60,
+                    "description": "Delay before liveness probe is initiated"
+                },
+                "periodSeconds": {
+                    "type": "number",
+                    "default": 10,
+                    "description": "How often to perform the probe"
+                },
+                "timeoutSeconds": {
+                    "type": "number",
+                    "default": 5,
+                    "description": "When the probe times out"
+                },
+                "failureThreshold": {
+                    "type": "number",
+                    "default": 6,
+                    "description": "Minimum consecutive failures to be considered failed"
+                },
+                "successThreshold": {
+                    "type": "number",
+                    "default": 1,
+                    "description": "Minimum consecutive successes to be considered successful"
+                }
+            }
+        },
+        "readinessProbe": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/disable the readiness probe"
+                },
+                "initialDelaySeconds": {
+                    "type": "number",
+                    "default": 30,
+                    "description": "Delay before readinessProbe is initiated"
+                },
+                "periodSeconds": {
+                    "type": "number",
+                    "default": 10,
+                    "description": "Period seconds for readinessProbe"
+                },
+                "timeoutSeconds": {
+                    "type": "number",
+                    "default": 5,
+                    "description": "When the probe times out"
+                },
+                "failureThreshold": {
+                    "type": "number",
+                    "default": 6,
+                    "description": "Minimum consecutive failures to be considered failed"
+                },
+                "successThreshold": {
+                    "type": "number",
+                    "default": 1,
+                    "description": "Minimum consecutive successes to be considered successful"
+                }
+            }
+        },
+        "service": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "default": "ClusterIP",
+                    "description": "Kubernetes Service type"
+                },
+                "port": {
+                    "type": "number",
+                    "default": 80,
+                    "description": "Guestbook service port"
+                },
+                "nodePort": {
+                    "type": "string",
+                    "default": "\"\"",
+                    "description": "Specify the nodePort value for the LoadBalancer and NodePort service types"
+                },
+                "loadBalancerIP": {
+                    "type": "string",
+                    "default": "\"\"",
+                    "description": "loadBalancerIP if Guestbook service type is `LoadBalancer` (optional, cloud specific)"
+                },
+                "annotations": {
+                    "type": "object",
+                    "default": "{}",
+                    "description": "Provide any additional annotations which may be required."
+                }
+            }
+        },
+        "ingress": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Set to true to enable ingress record generation"
+                },
+                "pathType": {
+                    "type": "string",
+                    "default": "ImplementationSpecific",
+                    "description": "Ingress Path type"
+                },
+                "apiVersion": {
+                    "type": "string",
+                    "default": "\"\"",
+                    "description": "Override API Version (automatically detected if not set)"
+                },
+                "hostname": {
+                    "type": "string",
+                    "default": "guestbook.local",
+                    "description": "When the ingress is enabled, a host pointing to this will be created"
+                },
+                "path": {
+                    "type": "string",
+                    "default": "/",
+                    "description": "The Path to Dokuwiki. You may need to set this to '/*' in order to use this"
+                },
+                "annotations": {
+                    "type": "object",
+                    "default": "{}",
+                    "description": "Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations."
+                },
+                "tls": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable TLS configuration for the hostname defined at ingress.hostname parameter"
+                },
+                "extraHosts": {
+                    "type": "array",
+                    "default": "[]",
+                    "description": "The list of additional hostnames to be covered with this ingress record."
+                },
+                "extraPaths": {
+                    "type": "array",
+                    "default": "[]",
+                    "description": "Any additional arbitrary paths that may need to be added to the ingress under the main host."
+                },
+                "extraTls": {
+                    "type": "array",
+                    "default": "[]",
+                    "description": "The tls configuration for additional hostnames to be covered with this ingress record."
+                },
+                "secrets": {
+                    "type": "array",
+                    "default": "[]",
+                    "description": "If you're providing your own certificates, please use this to add the certificates as secrets"
+                }
+            }
+        },
+        "dbReadiness": {
+            "type": "object",
+            "properties": {
+                "image": {
+                    "type": "object",
+                    "properties": {
+                        "registry": {
+                            "type": "string",
+                            "default": "docker.io",
+                            "description": "Init container dbReadiness image registry"
+                        },
+                        "repository": {
+                            "type": "string",
+                            "default": "library/busybox",
+                            "description": "Init container dbReadiness image repository"
+                        },
+                        "tag": {
+                            "type": "string",
+                            "default": "1.33.1",
+                            "description": "Init container dbReadiness image tag"
+                        },
+                        "pullPolicy": {
+                            "type": "string",
+                            "default": "IfNotPresent",
+                            "description": "Init container dbReadiness image pull policy"
+                        },
+                        "pullSecrets": {
+                            "type": "array",
+                            "default": "[]",
+                            "description": "Init container volume-permissions image pull secrets"
+                        }
+                    }
+                },
+                "resources": {
+                    "type": "object",
+                    "properties": {
+                        "limits": {
+                            "type": "object",
+                            "default": "{}",
+                            "description": "The resources limits for the container"
+                        },
+                        "requests": {
+                            "type": "object",
+                            "default": "{}",
+                            "description": "The requested resources for the container"
+                        }
+                    }
+                }
+            }
+        },
+        "postgresql": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Deploy the PostgreSQL sub-chart"
+                },
+                "usePasswordFile": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Mount the PostgreSQL secret as a file"
+                },
+                "external": {
+                    "type": "object",
+                    "properties": {
+                        "host": {
+                            "type": "string",
+                            "default": "\"\"",
+                            "description": "Host of an external PostgreSQL installation"
+                        },
+                        "user": {
+                            "type": "string",
+                            "default": "\"\"",
+                            "description": "Username of the external PostgreSQL installation"
+                        },
+                        "password": {
+                            "type": "string",
+                            "default": "\"\"",
+                            "description": "Password of the external PostgreSQL installation"
+                        }
+                    }
+                },
+                "existingSecret": {
+                    "type": "string",
+                    "default": "\"\"",
+                    "description": "Use an existing secret file with the PostgreSQL password (can be used with the bundled chart or with an existing installation)"
+                },
+                "postgresqlDatabase": {
+                    "type": "string",
+                    "default": "guestbook",
+                    "description": "Database name to be used by Guestbook"
+                },
+                "postgresqlUsername": {
+                    "type": "string",
+                    "default": "guestbook",
+                    "description": "Username to be created by the PostgreSQL bundled chart"
+                }
+            }
+        },
+        "metrics": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable the export of Prometheus metrics"
+                },
+                "service": {
+                    "type": "object",
+                    "properties": {
+                        "annotations": {
+                            "type": "object",
+                            "default": "{}",
+                            "description": "Annotations for Prometheus metrics service"
+                        }
+                    }
+                },
+                "serviceMonitor": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean",
+                            "default": false,
+                            "description": "If the operator is installed in your cluster, set to true to create a Service Monitor Entry"
+                        },
+                        "namespace": {
+                            "type": "string",
+                            "default": "\"\"",
+                            "description": "Namespace which Prometheus is running in"
+                        },
+                        "path": {
+                            "type": "string",
+                            "default": "/metrics",
+                            "description": "HTTP path to scrape for metrics"
+                        },
+                        "interval": {
+                            "type": "string",
+                            "default": "30s",
+                            "description": "Interval at which metrics should be scraped"
+                        },
+                        "scrapeTimeout": {
+                            "type": "string",
+                            "default": "\"\"",
+                            "description": "Specify the timeout after which the scrape is ended"
+                        },
+                        "relabellings": {
+                            "type": "array",
+                            "default": "[]",
+                            "description": "Specify Metric Relabellings to add to the scrape endpoint"
+                        },
+                        "honorLabels": {
+                            "type": "boolean",
+                            "default": false,
+                            "description": "Specify honorLabels parameter to add the scrape endpoint"
+                        },
+                        "additionalLabels": {
+                            "type": "object",
+                            "default": "{}",
+                            "description": "Used to pass Labels that are required by the installed Prometheus Operator"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
