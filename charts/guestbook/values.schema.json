@@ -352,7 +352,7 @@
                 },
                 "existingSecret": {
                     "type": "string",
-                    "default": "\"\"",
+                    "default": "{{ .Release.Name }}-postgresql",
                     "description": "Use an existing secret file with the PostgreSQL password (can be used with the bundled chart or with an existing installation)"
                 },
                 "postgresqlDatabase": {

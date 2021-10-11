@@ -139,16 +139,16 @@ Users ────────►│  Guestbook  ├─────────�
 
 ### PostgreSQL Parameters
 
-| Name                            | Description                                                                                                                    | Value       |
-| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ----------- |
-| `postgresql.enabled`            | Deploy the PostgreSQL sub-chart                                                                                                | `true`      |
-| `postgresql.usePasswordFile`    | Mount the PostgreSQL secret as a file                                                                                          | `false`     |
-| `postgresql.external.host`      | Host of an external PostgreSQL installation                                                                                    | `""`        |
-| `postgresql.external.user`      | Username of the external PostgreSQL installation                                                                               | `""`        |
-| `postgresql.external.password`  | Password of the external PostgreSQL installation                                                                               | `""`        |
-| `postgresql.existingSecret`     | Use an existing secret file with the PostgreSQL password (can be used with the bundled chart or with an existing installation) | `""`        |
-| `postgresql.postgresqlDatabase` | Database name to be used by Guestbook                                                                                          | `guestbook` |
-| `postgresql.postgresqlUsername` | Username to be created by the PostgreSQL bundled chart                                                                         | `guestbook` |
+| Name                            | Description                                                                                                                    | Value                            |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | -------------------------------- |
+| `postgresql.enabled`            | Deploy the PostgreSQL sub-chart                                                                                                | `true`                           |
+| `postgresql.usePasswordFile`    | Mount the PostgreSQL secret as a file                                                                                          | `false`                          |
+| `postgresql.external.host`      | Host of an external PostgreSQL installation                                                                                    | `""`                             |
+| `postgresql.external.user`      | Username of the external PostgreSQL installation                                                                               | `""`                             |
+| `postgresql.external.password`  | Password of the external PostgreSQL installation                                                                               | `""`                             |
+| `postgresql.existingSecret`     | Use an existing secret file with the PostgreSQL password (can be used with the bundled chart or with an existing installation) | `{{ .Release.Name }}-postgresql` |
+| `postgresql.postgresqlDatabase` | Database name to be used by Guestbook                                                                                          | `guestbook`                      |
+| `postgresql.postgresqlUsername` | Username to be created by the PostgreSQL bundled chart                                                                         | `guestbook`                      |
 
 
 ### Metrics parameters
