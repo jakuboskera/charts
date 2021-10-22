@@ -10,5 +10,5 @@ Icon
 # Thumbnails
 ._*
 
-# TGZ
-*.tgz
+# Chart dependencies
+/charts/*/charts
