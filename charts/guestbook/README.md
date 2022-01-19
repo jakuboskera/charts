@@ -83,7 +83,7 @@ Users ────────►│  Guestbook  ├─────────�
 | ------------------------------------ | ------------------------------------------------------------------------------------- | ----------------------- |
 | `image.registry`                     | Guestbook image registry                                                              | `docker.io`             |
 | `image.repository`                   | Guestbook image repository                                                            | `jakuboskera/guestbook` |
-| `image.tag`                          | Guestbook image tag (immutable tags are recommended)                                  | `v0.2.1`                |
+| `image.tag`                          | Guestbook image tag (immutable tags are recommended)                                  | `v0.3.0`                |
 | `image.pullPolicy`                   | Guestbook image pull policy                                                           | `IfNotPresent`          |
 | `image.pullSecrets`                  | Specify image pull secrets                                                            | `[]`                    |
 | `resources.requests`                 | The requested resources for the container                                             | `{}`                    |
