@@ -10,8 +10,9 @@ Applications developed by [@jakuboskera](https://github.com/jakuboskera) ready t
 - Helm 3.1.0+
 
 ## Usage
-```console
-$ helm repo add jakuboskera https://jakuboskera.github.com/charts
-$ helm search repo jakuboskera
-$ helm install my-release jakuboskera/<chart>
+
+```bash
+helm repo add jakuboskera https://jakuboskera.github.io/charts
+helm search repo jakuboskera
+helm install my-release jakuboskera/<chart>
 ```
