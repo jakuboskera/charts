@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -19,9 +19,7 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Install Helm
-        uses: azure/setup-helm@v1
-        with:
-          version: v3.6.2
+        uses: azure/setup-helm@v4
 
       - name: Add dependency chart repos
         run: |
@@ -29,7 +27,7 @@ jobs:
           helm repo add jakuboskera https://jakuboskera.github.io/charts
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.2.1
+        uses: helm/chart-releaser-action@v1.7.0
         with:
           charts_dir: charts
           charts_repo_url: https://jakuboskera.github.io/charts

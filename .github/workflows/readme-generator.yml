@@ -11,41 +11,46 @@ jobs:
   generate-chart-readme:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+      pull-requests: read
+
     steps:
       - name: Checkout bitnami-labs/readme-generator-for-helm
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: 'bitnami-labs/readme-generator-for-helm'
           ref: '967764dacee72c05fc5d01c84c13ebb5dab7ac8b'
           path: readme-generator-for-helm
 
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
           path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('readme-generator-for-helm/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
+
       - name: Install readme-generator-for-helm dependencies
         run: cd readme-generator-for-helm && npm install
 
       - name: Checkout jakuboskera/charts
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: charts
 
       - name: Get list of files with changes in Pull Request
         id: pr-file-changes
-        uses: trilom/file-changes-action@v1.2.4
-        with:
-          fileOutput: ' '
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/files \
+            --paginate --jq '.[].filename' | grep 'values\.yaml$' > raw-inputs || true
 
       - name: Prepare readme-generator-for-helm inputs
         run: |
-          cat $HOME/files.txt | tr " " "\n" | grep values\\.yaml > raw-inputs
           cat raw-inputs | sed 's/values.yaml/README.md/' >> raw-inputs
           cat raw-inputs | sed 's/values.yaml/values.schema.json/' >> raw-inputs
           cat raw-inputs | sed 's/charts/charts\/charts/' > prepared-inputs
@@ -54,9 +59,9 @@ jobs:
         run: readme-generator-for-helm/bin/index.js -r $(cat prepared-inputs | grep README) -v $(cat prepared-inputs | grep values) -m $(cat prepared-inputs | grep schema)
 
       - name: Commit files to PR
-        uses: EndBug/add-and-commit@v7
+        uses: EndBug/add-and-commit@v9
         with:
-          add: "['charts/*/README.md', 'charts/*/values.schema.json']"
+          add: "charts/*/README.md charts/*/values.schema.json"
           cwd: "./charts"
           message: "fix: Update chart's README.md"
           committer_name: GitHub Actions
