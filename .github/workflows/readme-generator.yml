@@ -39,6 +39,7 @@ jobs:
       - name: Checkout jakuboskera/charts
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.head_ref }}
           path: charts
 
       - name: Get list of files with changes in Pull Request

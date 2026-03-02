@@ -1,0 +1,17 @@
+apiVersion: v2
+type: application
+name: todo-operator
+version: 0.1.0
+appVersion: v0.1.0
+description: TODO Operator is a Kubernetes operator for managing TODO resources
+home: https://github.com/jakuboskera/todo-operator
+maintainers:
+- name: jakuboskera
+  email: iam@jakuboskera.dev
+sources:
+- https://github.com/jakuboskera/todo-operator
+- https://todo.jakuboskera.dev
+dependencies:
+- name: common
+  version: 2.x.x
+  repository: oci://registry-1.docker.io/bitnamicharts
