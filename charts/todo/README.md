@@ -121,11 +121,13 @@ When operator integration is enabled and CRDs are available, the chart creates:
 | `global.postgresql.auth.database`            | Name for a custom database to create (overrides `auth.database`)           | `todo`  |
 | `global.postgresql.service.ports.postgresql` | PostgreSQL service port (overrides `service.ports.postgresql`)             | `5432`  |
 
+
 ### PostgreSQL parameters
 
 | Name                 | Description                                                | Value   |
 | -------------------- | ---------------------------------------------------------- | ------- |
 | `postgresql.enabled` | Install PostgreSQL subchart. Only needed when config=prod. | `false` |
+
 
 ### Common parameters
 
@@ -138,6 +140,7 @@ When operator integration is enabled and CRDs are available, the chart creates:
 | `commonLabels`      | Common labels to add to all todo resources (sub-charts are not considered). Evaluated as a template      | `{}`            |
 | `clusterDomain`     | Kubernetes cluster domain                                                                                | `cluster.local` |
 | `extraDeploy`       | Array of extra objects to deploy with the release (evaluated as a template).                             | `[]`            |
+
 
 ### todo parameters
 
@@ -152,6 +155,7 @@ When operator integration is enabled and CRDs are available, the chart creates:
 | `image.pullSecrets`     | Specify image pull secrets                                                            | `[]`               |
 | `resources.requests`    | The requested resources for the container                                             | `{}`               |
 | `networkPolicy.enabled` | Enable creation of NetworkPolicy resources. Only Ingress traffic is filtered for now. | `false`            |
+
 
 ### Traffic exposure parameters
 
@@ -174,6 +178,7 @@ When operator integration is enabled and CRDs are available, the chart creates:
 | `ingress.extraTls`       | The tls configuration for additional hostnames to be covered with this ingress record.                                           | `[]`                     |
 | `ingress.secrets`        | If you're providing your own certificates, please use this to add the certificates as secrets                                    | `[]`                     |
 
+
 ### Init container dbReadiness parameters
 
 | Name                             | Description                                          | Value             |
@@ -186,11 +191,13 @@ When operator integration is enabled and CRDs are available, the chart creates:
 | `dbReadiness.resources.limits`   | The resources limits for the container               | `{}`              |
 | `dbReadiness.resources.requests` | The requested resources for the container            | `{}`              |
 
+
 ### Todo Operator parameters
 
-| Name               | Description                    | Value  |
-| ------------------ | ------------------------------ | ------ |
-| `operator.enabled` | Install todo-operator subchart | `true` |
+| Name               | Description                    | Value   |
+| ------------------ | ------------------------------ | ------- |
+| `operator.enabled` | Install todo-operator subchart | `false` |
+
 
 ### Todo Operator integration parameters
 
@@ -198,6 +205,7 @@ When operator integration is enabled and CRDs are available, the chart creates:
 | --------------------------------- | --------------------------------------------------------------- | ------ |
 | `todoOperatorIntegration.enabled` | Enable TodoEndpoint and Task custom resources for this instance | `true` |
 | `todoOperatorIntegration.tasks`   | List of tasks to create for THIS todo instance                  | `[]`   |
+
 
 ## Configuration and installation details
 
