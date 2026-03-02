@@ -1,6 +1,6 @@
 <div align="center">
     <h1>Helm charts for Kubernetes</h1>
-    <a href="https://github.com/jakuboskera/charts/actions"><img alt="jakuboskera" src="https://img.shields.io/github/workflow/status/jakuboskera/charts/Release%20Charts?label=Release%20charts&logo=github"></a>
+    <a href="https://github.com/jakuboskera/charts/actions/workflows/chart-releaser.yml"><img alt="Release Charts" src="https://img.shields.io/github/actions/workflow/status/jakuboskera/charts/chart-releaser.yml?branch=main&label=Release%20charts&logo=github"></a>
     <a href="https://opensource.org/licenses/Apache-2.0"><img alt="jakuboskera" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"></a>
 </div>
 
