@@ -157,4 +157,26 @@ entries:
     urls:
     - https://github.com/jakuboskera/charts/releases/download/guestbook-0.1.0/guestbook-0.1.0.tgz
     version: 0.1.0
-generated: "2022-01-19T20:44:58.980064544Z"
+  todo-operator:
+  - apiVersion: v2
+    appVersion: v0.1.0
+    created: "2026-03-02T12:56:30.693883165Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 2.x.x
+    description: TODO Operator is a Kubernetes operator for managing TODO resources
+    digest: d29f416d84ce8e814c5a79ab5c2a32e6d5e584157bc19784d193ab4363dac4e1
+    home: https://github.com/jakuboskera/todo-operator
+    maintainers:
+    - email: iam@jakuboskera.dev
+      name: jakuboskera
+    name: todo-operator
+    sources:
+    - https://github.com/jakuboskera/todo-operator
+    - https://todo.jakuboskera.dev
+    type: application
+    urls:
+    - https://github.com/jakuboskera/charts/releases/download/todo-operator-0.1.0/todo-operator-0.1.0.tgz
+    version: 0.1.0
+generated: "2026-03-02T12:56:30.69390719Z"
