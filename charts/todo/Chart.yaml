@@ -1,0 +1,25 @@
+apiVersion: v2
+type: application
+name: todo
+version: 0.1.0
+appVersion: v0.2.3
+description: TODO is a simple web application with API Swagger documentation
+home: https://github.com/jakuboskera/todo
+maintainers:
+- name: jakuboskera
+  email: iam@jakuboskera.dev
+sources:
+- https://github.com/jakuboskera/todo
+- https://todo.jakuboskera.dev
+dependencies:
+- name: postgresql
+  version: 18.4.0
+  repository: oci://registry-1.docker.io/bitnamicharts
+  condition: postgresql.enabled
+- name: common
+  version: 2.x.x
+  repository: oci://registry-1.docker.io/bitnamicharts
+- name: todo-operator
+  version: 0.1.0
+  repository: https://jakuboskera.github.io/charts
+  condition: operator.enabled

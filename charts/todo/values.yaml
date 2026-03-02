@@ -1,0 +1,297 @@
+## @section Global parameters
+
+## Global Docker image parameters
+## Please, note that this will override the image parameters, including dependencies, configured to use the global value
+## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass
+
+## @param global.imageRegistry Global Docker image registry
+## @param global.imagePullSecrets Global Docker registry secret names as an array
+## @param global.storageClass Global StorageClass for Persistent Volume(s)
+##
+global:
+  imageRegistry: ""
+  ## E.g.
+  ## imagePullSecrets:
+  ##   - myRegistryKeySecretName
+  ##
+  imagePullSecrets: []
+  storageClass: ""
+  postgresql:
+    ## @param global.postgresql.auth.postgresPassword Password for the "postgres" admin user (overrides `auth.postgresPassword`)
+    ## @param global.postgresql.auth.username Name for a custom user to create (overrides `auth.username`)
+    ## @param global.postgresql.auth.password Password for the custom user to create (overrides `auth.password`)
+    ## @param global.postgresql.auth.database Name for a custom database to create (overrides `auth.database`)
+    ##
+    auth:
+      postgresPassword: admin
+      username: todo
+      password: todo
+      database: todo
+    ## @param global.postgresql.service.ports.postgresql PostgreSQL service port (overrides `service.ports.postgresql`)
+    ##
+    service:
+      ports:
+        postgresql: 5432
+
+## @section PostgreSQL parameters
+
+## @param postgresql.enabled Install PostgreSQL subchart. Only needed when config=prod.
+##
+postgresql:
+  enabled: false
+
+## @section Common parameters
+
+## @param kubeVersion Force target Kubernetes version (using Helm capabilities if not set)
+##
+kubeVersion: ""
+## @param nameOverride String to partially override todo.fullname template with a string (will prepend the release name)
+##
+nameOverride: ""
+## @param fullnameOverride String to fully override todo.fullname template with a string
+##
+fullnameOverride: ""
+## @param commonAnnotations Common annotations to add to all todo resources (sub-charts are not considered). Evaluated as a template
+##
+commonAnnotations: {}
+## @param commonLabels Common labels to add to all todo resources (sub-charts are not considered). Evaluated as a template
+##
+commonLabels: {}
+## @param clusterDomain Kubernetes cluster domain
+##
+clusterDomain: cluster.local
+## @param extraDeploy Array of extra objects to deploy with the release (evaluated as a template).
+##
+extraDeploy: []
+
+## @section todo parameters
+
+## @param apiKey API key used to authenticate requests to the todo API. Stored in a Secret as API_KEY.
+##
+apiKey: "12345678"
+
+## @param config Application configuration profile.
+## Allowed values: dev, test, without_persistent_database, prod
+## - dev: SQLite local file (no PostgreSQL needed)
+## - test: SQLite in-memory (no PostgreSQL needed)
+## - without_persistent_database: SQLite local file (no PostgreSQL needed)
+## - prod: PostgreSQL (requires postgresql.enabled=true)
+##
+config: dev
+
+## todo image
+## ref: https://hub.docker.com/r/jakuboskera/todo/tags
+## @param image.registry todo image registry
+## @param image.repository todo image repository
+## @param image.tag todo image tag (immutable tags are recommended)
+## @param image.pullPolicy todo image pull policy
+## @param image.pullSecrets Specify image pull secrets
+##
+image:
+  registry: docker.io
+  repository: jakuboskera/todo
+  tag: v0.2.3
+  ## Specify a imagePullPolicy. Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
+  ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+  ##
+  pullPolicy: IfNotPresent
+  ## Optionally specify an array of imagePullSecrets.
+  ## Secrets must be manually created in the namespace.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  ## e.g:
+  ## pullSecrets:
+  ##   - myRegistryKeySecretName
+  ##
+  pullSecrets: []
+## Configure resource requests and limits
+## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+## @param resources.requests [object] The requested resources for the container
+##
+resources:
+  requests:
+    memory: 64Mi
+    cpu: 100m
+networkPolicy:
+  ## @param networkPolicy.enabled Enable creation of NetworkPolicy resources. Only Ingress traffic is filtered for now.
+  ##
+  enabled: false
+
+## @section Traffic exposure parameters
+
+## Service parameters
+##
+service:
+  ## @param service.type Kubernetes Service type
+  ##
+  type: ClusterIP
+  ## @param service.port todo service port
+  ##
+  port: 80
+  ## @param service.nodePort Specify the nodePort value for the LoadBalancer and NodePort service types
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
+  ##
+  nodePort: ""
+  ## @param service.loadBalancerIP loadBalancerIP if todo service type is `LoadBalancer` (optional, cloud specific)
+  ## ref: http://kubernetes.io/docs/user-guide/services/#type-loadbalancer
+  ##
+  loadBalancerIP: ""
+  ## @param service.annotations Provide any additional annotations which may be required.
+  ## This can be used to set the LoadBalancer service type to internal only.
+  ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
+  ##
+  annotations: {}
+## Configure the ingress resource that allows you to access the
+## todo installation. Set up the URL
+## ref: http://kubernetes.io/docs/user-guide/ingress/
+##
+ingress:
+  ## @param ingress.enabled Set to true to enable ingress record generation
+  ##
+  enabled: false
+  ## @param ingress.pathType Ingress Path type
+  ##
+  pathType: ImplementationSpecific
+  ## @param ingress.apiVersion Override API Version (automatically detected if not set)
+  ##
+  apiVersion: ""
+  ## @param ingress.hostname When the ingress is enabled, a host pointing to this will be created
+  ##
+  hostname: todo.local
+  ## @param ingress.path The Path to Dokuwiki. You may need to set this to '/*' in order to use this
+  ## with ALB ingress controllers.
+  ##
+  path: /
+  ## @param ingress.annotations Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations.
+  ## For a full list of possible ingress annotations, please see
+  ## ref: https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/annotations.md
+  ## Use this parameter to set the required annotations for cert-manager, see
+  ## ref: https://cert-manager.io/docs/usage/ingress/#supported-annotations
+  ##
+  ## e.g:
+  ## annotations:
+  ##   kubernetes.io/ingress.class: nginx
+  ##   cert-manager.io/cluster-issuer: cluster-issuer-name
+  ##
+  annotations: {}
+  ## @param ingress.tls Enable TLS configuration for the hostname defined at ingress.hostname parameter
+  ## TLS certificates will be retrieved from a TLS secret with name .Values.ingress.hostname
+  ##
+  tls: false
+  ## @param ingress.extraHosts The list of additional hostnames to be covered with this ingress record.
+  ## Most likely the hostname above will be enough, but in the event more hosts are needed, this is an array
+  ## extraHosts:
+  ## - name: dokuwiki.local
+  ##   path: /
+  extraHosts: []
+  ## @param ingress.extraPaths Any additional arbitrary paths that may need to be added to the ingress under the main host.
+  ## For example: The ALB ingress controller requires a special rule for handling SSL redirection.
+  ## extraPaths:
+  ## - path: /*
+  ##   backend:
+  ##     serviceName: ssl-redirect
+  ##     servicePort: use-annotation
+  extraPaths: []
+  ## @param ingress.extraTls The tls configuration for additional hostnames to be covered with this ingress record.
+  ## see: https://kubernetes.io/docs/concepts/services-networking/ingress/#tls
+  ## extraTls:
+  ## - hosts:
+  ##     - dokuwiki.local
+  ##   secretName: dokuwiki.local-tls
+  extraTls: []
+  ## @param ingress.secrets If you're providing your own certificates, please use this to add the certificates as secrets
+  ## key and certificate should start with -----BEGIN CERTIFICATE----- or
+  ## -----BEGIN RSA PRIVATE KEY-----
+  ##
+  ## name should line up with a tlsSecret set further up
+  ## If you're using cert-manager, this is unneeded, as it will create the secret for you if it is not set
+  ##
+  ## It is also possible to create and manage the certificates outside of this helm chart
+  ## Please see README.md for more information
+  ## Example:
+  ## - name: dokuwiki.local-tls
+  ##   key:
+  ##   certificate:
+  ##
+  secrets: []
+
+## @section Init container dbReadiness parameters
+
+## Init Container parameters
+## It checks database availability
+##
+dbReadiness:
+  ## @param dbReadiness.image.registry Init container dbReadiness image registry
+  ## @param dbReadiness.image.repository Init container dbReadiness image repository
+  ## @param dbReadiness.image.tag Init container dbReadiness image tag
+  ## @param dbReadiness.image.pullPolicy Init container dbReadiness image pull policy
+  ## @param dbReadiness.image.pullSecrets Init container volume-permissions image pull secrets
+  ##
+  image:
+    registry: docker.io
+    repository: library/busybox
+    tag: 1.37.0
+    ## Specify a imagePullPolicy. Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
+    ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+    ##
+    pullPolicy: IfNotPresent
+    ## Optionally specify an array of imagePullSecrets.
+    ## Secrets must be manually created in the namespace.
+    ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+    ##
+    pullSecrets: []
+    ##   - myRegistryKeySecretName
+  ## Init containers' resource requests and limits
+  ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+  ## We usually recommend not to specify default resources and to leave this as a conscious
+  ## choice for the user. This also increases chances charts run on environments with little
+  ## resources, such as Minikube. If you do want to specify resources, uncomment the following
+  ## lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  ## @param dbReadiness.resources.limits The resources limits for the container
+  ## @param dbReadiness.resources.requests The requested resources for the container
+  ##
+  resources:
+    ## Example:
+    ## limits:
+    ##    cpu: 100m
+    ##    memory: 128Mi
+    limits: {}
+    ## Examples:
+    ## requests:
+    ##    cpu: 100m
+    ##    memory: 128Mi
+    requests: {}
+
+## @section Todo Operator parameters
+##
+## Configure installation of todo-operator as a Helm dependency.
+## This installs the operator in the same release.
+##
+## @param operator.enabled Install todo-operator subchart
+##
+operator:
+  enabled: false
+
+## @section Todo Operator integration parameters
+##
+## IMPORTANT:
+## - Enabling this feature requires todo-operator CRDs to be installed in the cluster.
+## - If operator.enabled=true, CRDs are installed automatically by the subchart.
+## - If operator.enabled=false, CRDs must be pre-installed (e.g. via standalone todo-operator chart).
+## - If CRDs are not available, TodoEndpoint and Task resources are silently skipped.
+## - Tasks created here are always bound to THIS todo instance only.
+##
+## @param todoOperatorIntegration.enabled Enable TodoEndpoint and Task custom resources for this instance
+##
+todoOperatorIntegration:
+  enabled: true
+  ## @param todoOperatorIntegration.tasks List of tasks to create for THIS todo instance
+  ##
+  tasks: []
+  ## Example:
+  ## tasks:
+  ##   - name: finish-implementation
+  ##     text: "Finish implementation"
+  ##     isDone: true
+  ##   - name: write-documentation
+  ##     text: "Write documentation"
+  ##     isDone: false
