@@ -190,6 +190,27 @@ entries:
   todo-operator:
   - apiVersion: v2
     appVersion: v0.1.0
+    created: "2026-03-02T13:35:29.296110015Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 2.x.x
+    description: TODO Operator is a Kubernetes operator for managing TODO resources
+    digest: 8cd86c190a52807e1c7243b0b3a4db93d3c4fc67d68a2c81af9327d7b798db77
+    home: https://github.com/jakuboskera/todo-operator
+    maintainers:
+    - email: iam@jakuboskera.dev
+      name: jakuboskera
+    name: todo-operator
+    sources:
+    - https://github.com/jakuboskera/todo-operator
+    - https://todo.jakuboskera.dev
+    type: application
+    urls:
+    - https://github.com/jakuboskera/charts/releases/download/todo-operator-0.1.1/todo-operator-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: v0.1.0
     created: "2026-03-02T12:56:30.693883165Z"
     dependencies:
     - name: common
@@ -209,4 +230,4 @@ entries:
     urls:
     - https://github.com/jakuboskera/charts/releases/download/todo-operator-0.1.0/todo-operator-0.1.0.tgz
     version: 0.1.0
-generated: "2026-03-02T13:27:15.320389377Z"
+generated: "2026-03-02T13:35:29.296134461Z"
