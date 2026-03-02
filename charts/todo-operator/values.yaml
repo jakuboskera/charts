@@ -67,7 +67,7 @@ image:
   pullSecrets: []
 ## Configure resource requests and limits
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
-## @param resources.requests [object] The requested resources for the container
+## @param resources Set container requests and limits for different resources like CPU or memory
 ##
 ## resources:
 ##   limits:
@@ -81,17 +81,11 @@ resources: {}
 ## @param replicaCount Number of todo-operator replicas to deploy
 ##
 replicaCount: 1
-## @param podLabels Additional labels for NGINX pods
+## @param podLabels Additional labels for todo-operator pods
 ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 ##
 podLabels: {}
-## @param podAnnotations Annotations for NGINX pods
+## @param podAnnotations Annotations for todo-operator pods
 ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
 ##
 podAnnotations: {}
-
-## @param crds.enabled Install CRDs as part of the Helm installation
-## @param crds.keep Add "helm.sh/resource-policy": keep annotation to the CRD to prevent Helm from uninstalling it when the Helm release is uninstalled
-crds:
-  enabled: true
-  keep: true
