@@ -1,6 +1,6 @@
 # TODO Operator
 
-TODO Operator is a showcase of a small Kubernetes operator that can be used to manage the [TODO](https://github.com/jakuboskera/todo) application. It introduces custom resources `Task` and `TodoEndpoint` to your cluster.
+[TODO Operator](https://github.com/jakuboskera/todo-operator) is a showcase of a small Kubernetes operator that can be used to manage the [TODO](https://github.com/jakuboskera/todo) application. It introduces custom resources `Task` and `TodoEndpoint` to your cluster.
 
 ## TL;DR
 
