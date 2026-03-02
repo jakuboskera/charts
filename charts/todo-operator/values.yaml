@@ -1,0 +1,97 @@
+## @section Global parameters
+
+## Global Docker image parameters
+## Please, note that this will override the image parameters, including dependencies, configured to use the global value
+## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass
+
+## @param global.imageRegistry Global Docker image registry
+## @param global.imagePullSecrets Global Docker registry secret names as an array
+##
+global:
+  imageRegistry: ""
+  ## E.g.
+  ## imagePullSecrets:
+  ##   - myRegistryKeySecretName
+  ##
+  imagePullSecrets: []
+
+## @section Common parameters
+
+## @param kubeVersion Force target Kubernetes version (using Helm capabilities if not set)
+##
+kubeVersion: ""
+## @param nameOverride String to partially override todo.fullname template with a string (will prepend the release name)
+##
+nameOverride: ""
+## @param fullnameOverride String to fully override todo.fullname template with a string
+##
+fullnameOverride: ""
+## @param commonAnnotations Common annotations to add to all todo resources (sub-charts are not considered). Evaluated as a template
+##
+commonAnnotations: {}
+## @param commonLabels Common labels to add to all todo resources (sub-charts are not considered). Evaluated as a template
+##
+commonLabels: {}
+## @param clusterDomain Kubernetes cluster domain
+##
+clusterDomain: cluster.local
+## @param extraDeploy Array of extra objects to deploy with the release (evaluated as a template).
+##
+extraDeploy: []
+
+## @section todo-operator parameters
+
+## todo-operator image
+## ref: https://hub.docker.com/r/jakuboskera/todo-operator/tags
+## @param image.registry todo-operator image registry
+## @param image.repository todo-operator image repository
+## @param image.tag todo-operator image tag (immutable tags are recommended)
+## @param image.pullPolicy todo-operator image pull policy
+## @param image.pullSecrets Specify image pull secrets
+##
+image:
+  registry: docker.io
+  repository: jakuboskera/todo-operator
+  tag: v0.1.0
+  ## Specify a imagePullPolicy. Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
+  ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+  ##
+  pullPolicy: IfNotPresent
+  ## Optionally specify an array of imagePullSecrets.
+  ## Secrets must be manually created in the namespace.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  ## e.g:
+  ## pullSecrets:
+  ##   - myRegistryKeySecretName
+  ##
+  pullSecrets: []
+## Configure resource requests and limits
+## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+## @param resources.requests [object] The requested resources for the container
+##
+## resources:
+##   limits:
+##     cpu: 500m
+##     memory: 128Mi
+##   requests:
+##     cpu: 10m
+##     memory: 64Mi
+##
+resources: {}
+## @param replicaCount Number of todo-operator replicas to deploy
+##
+replicaCount: 1
+## @param podLabels Additional labels for NGINX pods
+## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+##
+podLabels: {}
+## @param podAnnotations Annotations for NGINX pods
+## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+##
+podAnnotations: {}
+
+## @param crds.enabled Install CRDs as part of the Helm installation
+## @param crds.keep Add "helm.sh/resource-policy": keep annotation to the CRD to prevent Helm from uninstalling it when the Helm release is uninstalled
+crds:
+  enabled: true
+  keep: true

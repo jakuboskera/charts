@@ -1,0 +1,111 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.20.1
+  name: tasks.todo.jakuboskera.dev
+spec:
+  group: todo.jakuboskera.dev
+  names:
+    kind: Task
+    listKind: TaskList
+    plural: tasks
+    singular: task
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .spec.text
+      name: Text
+      type: string
+    - jsonPath: .spec.isDone
+      name: Done
+      type: boolean
+    - jsonPath: .spec.endpointRef.name
+      name: Endpoint
+      type: string
+    - jsonPath: .status.externalRef.id
+      name: ExternalID
+      type: integer
+    - jsonPath: .metadata.creationTimestamp
+      name: Age
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Task is the Schema for the tasks API
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: TaskSpec defines the desired state of Task
+            properties:
+              endpointRef:
+                description: |-
+                  EndpointRef refers to a TodoEndpoint in the same namespace.
+                  The operator uses this endpoint to communicate with the Todo API instance.
+                properties:
+                  name:
+                    description: Name is the name of the object in the same namespace
+                    type: string
+                required:
+                - name
+                type: object
+              isDone:
+                description: IsDone indicates whether the task is completed
+                type: boolean
+              text:
+                description: Text is the task description
+                minLength: 1
+                type: string
+            required:
+            - endpointRef
+            - text
+            type: object
+          status:
+            description: TaskStatus defines the observed state of Task
+            properties:
+              externalRef:
+                description: |-
+                  ExternalRef is set once the task has been successfully created on an
+                  external Todo API instance. It is nil until then, and is cleared
+                  whenever the endpoint reference changes so the task can be recreated
+                  on the new endpoint.
+                properties:
+                  endpointRef:
+                    description: EndpointRef is the name of the TodoEndpoint where
+                      the task was created.
+                    type: string
+                  id:
+                    description: ID is the task ID assigned by that endpoint's API.
+                    type: integer
+                required:
+                - endpointRef
+                - id
+                type: object
+              observedGeneration:
+                description: ObservedGeneration tracks the last reconciled generation
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
