@@ -157,6 +157,36 @@ entries:
     urls:
     - https://github.com/jakuboskera/charts/releases/download/guestbook-0.1.0/guestbook-0.1.0.tgz
     version: 0.1.0
+  todo:
+  - apiVersion: v2
+    appVersion: v0.2.3
+    created: "2026-03-02T13:27:15.320367125Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 18.4.0
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 2.x.x
+    - condition: operator.enabled
+      name: todo-operator
+      repository: https://jakuboskera.github.io/charts
+      version: 0.1.0
+    description: TODO is a simple web application with API Swagger documentation
+    digest: 24f652a3a59ed433b9d03d479dde6c742eb3d0a5ad683642ca58ab4968ee57a3
+    home: https://github.com/jakuboskera/todo
+    maintainers:
+    - email: iam@jakuboskera.dev
+      name: jakuboskera
+    name: todo
+    sources:
+    - https://github.com/jakuboskera/todo
+    - https://todo.jakuboskera.dev
+    type: application
+    urls:
+    - https://github.com/jakuboskera/charts/releases/download/todo-0.1.0/todo-0.1.0.tgz
+    version: 0.1.0
   todo-operator:
   - apiVersion: v2
     appVersion: v0.1.0
@@ -179,4 +209,4 @@ entries:
     urls:
     - https://github.com/jakuboskera/charts/releases/download/todo-operator-0.1.0/todo-operator-0.1.0.tgz
     version: 0.1.0
-generated: "2026-03-02T12:56:30.69390719Z"
+generated: "2026-03-02T13:27:15.320389377Z"
