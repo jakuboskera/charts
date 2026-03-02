@@ -147,6 +147,42 @@ spec:
 
 ## Parameters
 
+### Global parameters
+
+| Name                      | Description                                     | Value |
+| ------------------------- | ----------------------------------------------- | ----- |
+| `global.imageRegistry`    | Global Docker image registry                    | `""`  |
+| `global.imagePullSecrets` | Global Docker registry secret names as an array | `[]`  |
+
+
+### Common parameters
+
+| Name                | Description                                                                                              | Value           |
+| ------------------- | -------------------------------------------------------------------------------------------------------- | --------------- |
+| `kubeVersion`       | Force target Kubernetes version (using Helm capabilities if not set)                                     | `""`            |
+| `nameOverride`      | String to partially override todo.fullname template with a string (will prepend the release name)        | `""`            |
+| `fullnameOverride`  | String to fully override todo.fullname template with a string                                            | `""`            |
+| `commonAnnotations` | Common annotations to add to all todo resources (sub-charts are not considered). Evaluated as a template | `{}`            |
+| `commonLabels`      | Common labels to add to all todo resources (sub-charts are not considered). Evaluated as a template      | `{}`            |
+| `clusterDomain`     | Kubernetes cluster domain                                                                                | `cluster.local` |
+| `extraDeploy`       | Array of extra objects to deploy with the release (evaluated as a template).                             | `[]`            |
+
+
+### todo-operator parameters
+
+| Name                | Description                                                                  | Value                       |
+| ------------------- | ---------------------------------------------------------------------------- | --------------------------- |
+| `image.registry`    | todo-operator image registry                                                 | `docker.io`                 |
+| `image.repository`  | todo-operator image repository                                               | `jakuboskera/todo-operator` |
+| `image.tag`         | todo-operator image tag (immutable tags are recommended)                     | `v0.1.0`                    |
+| `image.pullPolicy`  | todo-operator image pull policy                                              | `IfNotPresent`              |
+| `image.pullSecrets` | Specify image pull secrets                                                   | `[]`                        |
+| `resources`         | Set container requests and limits for different resources like CPU or memory | `{}`                        |
+| `replicaCount`      | Number of todo-operator replicas to deploy                                   | `1`                         |
+| `podLabels`         | Additional labels for todo-operator pods                                     | `{}`                        |
+| `podAnnotations`    | Annotations for todo-operator pods                                           | `{}`                        |
+
+
 ## Configuration and installation details
 
 ### [Rolling VS Immutable tags](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/)

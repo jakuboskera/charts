@@ -1,0 +1,106 @@
+{
+    "title": "Chart Values",
+    "type": "object",
+    "properties": {
+        "global": {
+            "type": "object",
+            "properties": {
+                "imageRegistry": {
+                    "type": "string",
+                    "default": "\"\"",
+                    "description": "Global Docker image registry"
+                },
+                "imagePullSecrets": {
+                    "type": "array",
+                    "default": "[]",
+                    "description": "Global Docker registry secret names as an array"
+                }
+            }
+        },
+        "kubeVersion": {
+            "type": "string",
+            "default": "\"\"",
+            "description": "Force target Kubernetes version (using Helm capabilities if not set)"
+        },
+        "nameOverride": {
+            "type": "string",
+            "default": "\"\"",
+            "description": "String to partially override todo.fullname template with a string (will prepend the release name)"
+        },
+        "fullnameOverride": {
+            "type": "string",
+            "default": "\"\"",
+            "description": "String to fully override todo.fullname template with a string"
+        },
+        "commonAnnotations": {
+            "type": "object",
+            "default": "{}",
+            "description": "Common annotations to add to all todo resources (sub-charts are not considered). Evaluated as a template"
+        },
+        "commonLabels": {
+            "type": "object",
+            "default": "{}",
+            "description": "Common labels to add to all todo resources (sub-charts are not considered). Evaluated as a template"
+        },
+        "clusterDomain": {
+            "type": "string",
+            "default": "cluster.local",
+            "description": "Kubernetes cluster domain"
+        },
+        "extraDeploy": {
+            "type": "array",
+            "default": "[]",
+            "description": "Array of extra objects to deploy with the release (evaluated as a template)."
+        },
+        "image": {
+            "type": "object",
+            "properties": {
+                "registry": {
+                    "type": "string",
+                    "default": "docker.io",
+                    "description": "todo-operator image registry"
+                },
+                "repository": {
+                    "type": "string",
+                    "default": "jakuboskera/todo-operator",
+                    "description": "todo-operator image repository"
+                },
+                "tag": {
+                    "type": "string",
+                    "default": "v0.1.0",
+                    "description": "todo-operator image tag (immutable tags are recommended)"
+                },
+                "pullPolicy": {
+                    "type": "string",
+                    "default": "IfNotPresent",
+                    "description": "todo-operator image pull policy"
+                },
+                "pullSecrets": {
+                    "type": "array",
+                    "default": "[]",
+                    "description": "Specify image pull secrets"
+                }
+            }
+        },
+        "resources": {
+            "type": "object",
+            "default": "{}",
+            "description": "Set container requests and limits for different resources like CPU or memory"
+        },
+        "replicaCount": {
+            "type": "number",
+            "default": 1,
+            "description": "Number of todo-operator replicas to deploy"
+        },
+        "podLabels": {
+            "type": "object",
+            "default": "{}",
+            "description": "Additional labels for todo-operator pods"
+        },
+        "podAnnotations": {
+            "type": "object",
+            "default": "{}",
+            "description": "Annotations for todo-operator pods"
+        }
+    }
+}
