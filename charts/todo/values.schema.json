@@ -1,0 +1,341 @@
+{
+    "title": "Chart Values",
+    "type": "object",
+    "properties": {
+        "global": {
+            "type": "object",
+            "properties": {
+                "imageRegistry": {
+                    "type": "string",
+                    "default": "\"\"",
+                    "description": "Global Docker image registry"
+                },
+                "imagePullSecrets": {
+                    "type": "array",
+                    "default": "[]",
+                    "description": "Global Docker registry secret names as an array"
+                },
+                "storageClass": {
+                    "type": "string",
+                    "default": "\"\"",
+                    "description": "Global StorageClass for Persistent Volume(s)"
+                },
+                "postgresql": {
+                    "type": "object",
+                    "properties": {
+                        "auth": {
+                            "type": "object",
+                            "properties": {
+                                "postgresPassword": {
+                                    "type": "string",
+                                    "default": "admin",
+                                    "description": "Password for the \"postgres\" admin user (overrides `auth.postgresPassword`)"
+                                },
+                                "username": {
+                                    "type": "string",
+                                    "default": "todo",
+                                    "description": "Name for a custom user to create (overrides `auth.username`)"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "default": "todo",
+                                    "description": "Password for the custom user to create (overrides `auth.password`)"
+                                },
+                                "database": {
+                                    "type": "string",
+                                    "default": "todo",
+                                    "description": "Name for a custom database to create (overrides `auth.database`)"
+                                }
+                            }
+                        },
+                        "service": {
+                            "type": "object",
+                            "properties": {
+                                "ports": {
+                                    "type": "object",
+                                    "properties": {
+                                        "postgresql": {
+                                            "type": "number",
+                                            "default": 5432,
+                                            "description": "PostgreSQL service port (overrides `service.ports.postgresql`)"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "postgresql": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Install PostgreSQL subchart. Only needed when config=prod."
+                }
+            }
+        },
+        "kubeVersion": {
+            "type": "string",
+            "default": "\"\"",
+            "description": "Force target Kubernetes version (using Helm capabilities if not set)"
+        },
+        "nameOverride": {
+            "type": "string",
+            "default": "\"\"",
+            "description": "String to partially override todo.fullname template with a string (will prepend the release name)"
+        },
+        "fullnameOverride": {
+            "type": "string",
+            "default": "\"\"",
+            "description": "String to fully override todo.fullname template with a string"
+        },
+        "commonAnnotations": {
+            "type": "object",
+            "default": "{}",
+            "description": "Common annotations to add to all todo resources (sub-charts are not considered). Evaluated as a template"
+        },
+        "commonLabels": {
+            "type": "object",
+            "default": "{}",
+            "description": "Common labels to add to all todo resources (sub-charts are not considered). Evaluated as a template"
+        },
+        "clusterDomain": {
+            "type": "string",
+            "default": "cluster.local",
+            "description": "Kubernetes cluster domain"
+        },
+        "extraDeploy": {
+            "type": "array",
+            "default": "[]",
+            "description": "Array of extra objects to deploy with the release (evaluated as a template)."
+        },
+        "apiKey": {
+            "type": "string",
+            "default": "12345678",
+            "description": "API key used to authenticate requests to the todo API. Stored in a Secret as API_KEY."
+        },
+        "config": {
+            "type": "string",
+            "default": "dev",
+            "description": "Application configuration profile."
+        },
+        "image": {
+            "type": "object",
+            "properties": {
+                "registry": {
+                    "type": "string",
+                    "default": "docker.io",
+                    "description": "todo image registry"
+                },
+                "repository": {
+                    "type": "string",
+                    "default": "jakuboskera/todo",
+                    "description": "todo image repository"
+                },
+                "tag": {
+                    "type": "string",
+                    "default": "v0.2.3",
+                    "description": "todo image tag (immutable tags are recommended)"
+                },
+                "pullPolicy": {
+                    "type": "string",
+                    "default": "IfNotPresent",
+                    "description": "todo image pull policy"
+                },
+                "pullSecrets": {
+                    "type": "array",
+                    "default": "[]",
+                    "description": "Specify image pull secrets"
+                }
+            }
+        },
+        "resources": {
+            "type": "object",
+            "properties": {
+                "requests": {
+                    "type": "object",
+                    "default": "{}",
+                    "description": "The requested resources for the container"
+                }
+            }
+        },
+        "networkPolicy": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable creation of NetworkPolicy resources. Only Ingress traffic is filtered for now."
+                }
+            }
+        },
+        "service": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "default": "ClusterIP",
+                    "description": "Kubernetes Service type"
+                },
+                "port": {
+                    "type": "number",
+                    "default": 80,
+                    "description": "todo service port"
+                },
+                "nodePort": {
+                    "type": "string",
+                    "default": "\"\"",
+                    "description": "Specify the nodePort value for the LoadBalancer and NodePort service types"
+                },
+                "loadBalancerIP": {
+                    "type": "string",
+                    "default": "\"\"",
+                    "description": "loadBalancerIP if todo service type is `LoadBalancer` (optional, cloud specific)"
+                },
+                "annotations": {
+                    "type": "object",
+                    "default": "{}",
+                    "description": "Provide any additional annotations which may be required."
+                }
+            }
+        },
+        "ingress": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Set to true to enable ingress record generation"
+                },
+                "pathType": {
+                    "type": "string",
+                    "default": "ImplementationSpecific",
+                    "description": "Ingress Path type"
+                },
+                "apiVersion": {
+                    "type": "string",
+                    "default": "\"\"",
+                    "description": "Override API Version (automatically detected if not set)"
+                },
+                "hostname": {
+                    "type": "string",
+                    "default": "todo.local",
+                    "description": "When the ingress is enabled, a host pointing to this will be created"
+                },
+                "path": {
+                    "type": "string",
+                    "default": "/",
+                    "description": "The Path to Dokuwiki. You may need to set this to '/*' in order to use this"
+                },
+                "annotations": {
+                    "type": "object",
+                    "default": "{}",
+                    "description": "Additional annotations for the Ingress resource. To enable certificate autogeneration, place here your cert-manager annotations."
+                },
+                "tls": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable TLS configuration for the hostname defined at ingress.hostname parameter"
+                },
+                "extraHosts": {
+                    "type": "array",
+                    "default": "[]",
+                    "description": "The list of additional hostnames to be covered with this ingress record."
+                },
+                "extraPaths": {
+                    "type": "array",
+                    "default": "[]",
+                    "description": "Any additional arbitrary paths that may need to be added to the ingress under the main host."
+                },
+                "extraTls": {
+                    "type": "array",
+                    "default": "[]",
+                    "description": "The tls configuration for additional hostnames to be covered with this ingress record."
+                },
+                "secrets": {
+                    "type": "array",
+                    "default": "[]",
+                    "description": "If you're providing your own certificates, please use this to add the certificates as secrets"
+                }
+            }
+        },
+        "dbReadiness": {
+            "type": "object",
+            "properties": {
+                "image": {
+                    "type": "object",
+                    "properties": {
+                        "registry": {
+                            "type": "string",
+                            "default": "docker.io",
+                            "description": "Init container dbReadiness image registry"
+                        },
+                        "repository": {
+                            "type": "string",
+                            "default": "library/busybox",
+                            "description": "Init container dbReadiness image repository"
+                        },
+                        "tag": {
+                            "type": "string",
+                            "default": "1.37.0",
+                            "description": "Init container dbReadiness image tag"
+                        },
+                        "pullPolicy": {
+                            "type": "string",
+                            "default": "IfNotPresent",
+                            "description": "Init container dbReadiness image pull policy"
+                        },
+                        "pullSecrets": {
+                            "type": "array",
+                            "default": "[]",
+                            "description": "Init container volume-permissions image pull secrets"
+                        }
+                    }
+                },
+                "resources": {
+                    "type": "object",
+                    "properties": {
+                        "limits": {
+                            "type": "object",
+                            "default": "{}",
+                            "description": "The resources limits for the container"
+                        },
+                        "requests": {
+                            "type": "object",
+                            "default": "{}",
+                            "description": "The requested resources for the container"
+                        }
+                    }
+                }
+            }
+        },
+        "operator": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Install todo-operator subchart"
+                }
+            }
+        },
+        "todoOperatorIntegration": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable TodoEndpoint and Task custom resources for this instance"
+                },
+                "tasks": {
+                    "type": "array",
+                    "default": "[]",
+                    "description": "List of tasks to create for THIS todo instance"
+                }
+            }
+        }
+    }
+}

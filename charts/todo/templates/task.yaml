@@ -1,0 +1,22 @@
+{{- if and .Values.todoOperatorIntegration.enabled .Values.todoOperatorIntegration.tasks (.Capabilities.APIVersions.Has "todo.jakuboskera.dev/v1alpha1") }}
+{{- range .Values.todoOperatorIntegration.tasks }}
+---
+apiVersion: todo.jakuboskera.dev/v1alpha1
+kind: Task
+metadata:
+  name: {{ .name }}
+  namespace: {{ $.Release.Namespace | quote }}
+  labels: {{- include "common.labels.standard" $ | nindent 4 }}
+    {{- if $.Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" $.Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if $.Values.commonAnnotations }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" $.Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+spec:
+  text: {{ .text | quote }}
+  isDone: {{ .isDone | default false }}
+  endpointRef:
+    name: {{ include "common.names.fullname" $ }}
+{{- end }}
+{{- end }}

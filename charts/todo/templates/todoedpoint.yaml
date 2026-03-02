@@ -1,0 +1,19 @@
+{{- if and .Values.todoOperatorIntegration.enabled (.Capabilities.APIVersions.Has "todo.jakuboskera.dev/v1alpha1") }}
+apiVersion: todo.jakuboskera.dev/v1alpha1
+kind: TodoEndpoint
+metadata:
+  name: {{ include "common.names.fullname" . }}
+  namespace: {{ .Release.Namespace | quote }}
+  labels: {{- include "common.labels.standard" . | nindent 4 }}
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+spec:
+  url: http://{{ include "common.names.fullname" . }}.{{ .Release.Namespace }}.svc.{{ .Values.clusterDomain }}
+  apiSecretRef:
+    name: {{ include "common.names.fullname" . }}
+    key: apiKey
+{{- end }}
