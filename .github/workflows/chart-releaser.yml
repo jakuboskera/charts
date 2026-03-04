@@ -26,10 +26,15 @@ jobs:
           helm repo add bitnami https://charts.bitnami.com/bitnami
           helm repo add jakuboskera https://jakuboskera.github.io/charts
 
+      - name: Build chart dependencies
+        run: |
+          for chart in charts/*/; do
+            helm dependency build "$chart"
+          done
+
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.7.0
         with:
           charts_dir: charts
-          charts_repo_url: https://jakuboskera.github.io/charts
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
