@@ -41,11 +41,11 @@ spec:
         - sh
         - -c
         - |
-          until nslookup {{ template "common.names.fullname" . }}-postgresql.{{ .Release.Namespace }}.svc.cluster.local
-          do
-            echo "Waiting until {{ template "common.names.fullname" . }}-postresql is ready..."
-            sleep 1
+          until nc -z -w 5 {{ .Release.Name }}-postgresql.{{ .Release.Namespace }}.svc.{{ .Values.clusterDomain }} {{ .Values.global.postgresql.service.ports.postgresql }}; do
+            echo "Waiting for PostgreSQL {{ .Release.Name }}-postgresql to accept connections..."
+            sleep 2
           done
+          echo "PostgreSQL is ready!"
         {{- if .Values.dbReadiness.resources }}
         resources: {{- toYaml .Values.dbReadiness.resources | nindent 12 }}
         {{- end }}
@@ -54,19 +54,25 @@ spec:
         image: {{ template "guestbook.image" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
         env:
+          {{- if eq .Values.config "prod" }}
+          - name: DATABASE_URL
+            value: {{ printf "%s://%s:%s@%s:%d/%s" "postgresql" .Values.global.postgresql.auth.username .Values.global.postgresql.auth.password (printf "%s-%s" .Release.Name "postgresql") (int .Values.global.postgresql.service.ports.postgresql) .Values.global.postgresql.auth.database }}
+          {{- end }}
+
+
           - name: DB_HOST
-            value: {{ template "common.names.fullname" . }}-postgresql
+            value: {{ include "common.names.fullname" . }}-postgresql
           - name: DB_PORT
-            value: {{ .Values.postgresql.service.port | quote }}
+            value: {{ .Values.global.postgresql.service.ports.postgresql | quote }}
           - name: DB_NAME
-            value: {{ .Values.postgresql.postgresqlDatabase }}
+            value: {{ .Values.global.postgresql.auth.database }}
           - name: DB_USER
-            value: {{ .Values.postgresql.postgresqlUsername }}
+            value: {{ .Values.global.postgresql.auth.username }}
           - name: DB_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: {{ template "common.names.fullname" . }}-postgresql
-                key: postgresql-password
+                name: {{ include "common.names.fullname" . }}-postgresql
+                key: password
           - name: PROMETHEUS_METRICS
             value: {{ ternary "enable" "disable" .Values.metrics.enabled }}
           - name: PORT

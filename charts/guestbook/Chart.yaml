@@ -1,7 +1,7 @@
 apiVersion: v2
 type: application
 name: guestbook
-version: 0.1.6
+version: 0.2.0
 appVersion: 0.3.0
 description: Guestbook is a simple cloud-native web application which allows visitors to leave a public comment without creating a user account.
 engine: gotpl
@@ -17,8 +17,8 @@ sources:
 dependencies:
 - condition: postgresql.enabled
   name: postgresql
-  version: 10.x.x
-  repository: https://charts.bitnami.com/bitnami
+  version: 18.4.0
+  repository: oci://registry-1.docker.io/bitnamicharts
 - name: common
-  version: 1.x.x
-  repository: https://charts.bitnami.com/bitnami
+  version: 2.x.x
+  repository: oci://registry-1.docker.io/bitnamicharts
