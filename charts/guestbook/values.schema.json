@@ -97,6 +97,11 @@
                 }
             }
         },
+        "replicaCount": {
+            "type": "number",
+            "default": 1,
+            "description": "Number of todo-operator replicas to deploy"
+        },
         "networkPolicy": {
             "type": "object",
             "properties": {
