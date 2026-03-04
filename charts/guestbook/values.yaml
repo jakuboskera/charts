@@ -16,6 +16,22 @@ global:
   ##
   imagePullSecrets: []
   storageClass: ""
+  postgresql:
+    ## @param global.postgresql.auth.postgresPassword Password for the "postgres" admin user (overrides `auth.postgresPassword`)
+    ## @param global.postgresql.auth.username Name for a custom user to create (overrides `auth.username`)
+    ## @param global.postgresql.auth.password Password for the custom user to create (overrides `auth.password`)
+    ## @param global.postgresql.auth.database Name for a custom database to create (overrides `auth.database`)
+    ##
+    auth:
+      postgresPassword: admin
+      username: guestbook
+      password: guestbook
+      database: guestbook
+    ## @param global.postgresql.service.ports.postgresql PostgreSQL service port (overrides `service.ports.postgresql`)
+    ##
+    service:
+      ports:
+        postgresql: 5432
 
 ## @section Common parameters
 
@@ -269,9 +285,6 @@ postgresql:
   ## @param postgresql.enabled Deploy the PostgreSQL sub-chart
   ##
   enabled: true
-  ## @param postgresql.usePasswordFile Mount the PostgreSQL secret as a file
-  ##
-  usePasswordFile: false
   ## Properties for using an existing PostgreSQL installation
   ##
   external:
@@ -284,15 +297,6 @@ postgresql:
     ## @param postgresql.external.password Password of the external PostgreSQL installation
     ##
     password: ""
-  ## @param postgresql.existingSecret Use an existing secret file with the PostgreSQL password (can be used with the bundled chart or with an existing installation)
-  ##
-  existingSecret: "{{ .Release.Name }}-postgresql"
-  ## @param postgresql.postgresqlDatabase Database name to be used by Guestbook
-  ##
-  postgresqlDatabase: guestbook
-  ## @param postgresql.postgresqlUsername Username to be created by the PostgreSQL bundled chart
-  ##
-  postgresqlUsername: guestbook
 
 ## @section Metrics parameters
 
