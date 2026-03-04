@@ -111,6 +111,10 @@ resources:
   requests:
     memory: 64Mi
     cpu: 100m
+## @param replicaCount Number of todo-operator replicas to deploy
+##
+replicaCount: 1
+
 networkPolicy:
   ## @param networkPolicy.enabled Enable creation of NetworkPolicy resources. Only Ingress traffic is filtered for now.
   ##

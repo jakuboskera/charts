@@ -1,7 +1,7 @@
 apiVersion: v2
 type: application
 name: todo
-version: 0.1.0
+version: 0.1.1
 appVersion: v0.2.3
 description: TODO is a simple web application with API Swagger documentation
 home: https://github.com/jakuboskera/todo
