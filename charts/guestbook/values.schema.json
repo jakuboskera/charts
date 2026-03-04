@@ -19,6 +19,51 @@
                     "type": "string",
                     "default": "\"\"",
                     "description": "Global StorageClass for Persistent Volume(s)"
+                },
+                "postgresql": {
+                    "type": "object",
+                    "properties": {
+                        "auth": {
+                            "type": "object",
+                            "properties": {
+                                "postgresPassword": {
+                                    "type": "string",
+                                    "default": "admin",
+                                    "description": "Password for the \"postgres\" admin user (overrides `auth.postgresPassword`)"
+                                },
+                                "username": {
+                                    "type": "string",
+                                    "default": "guestbook",
+                                    "description": "Name for a custom user to create (overrides `auth.username`)"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "default": "guestbook",
+                                    "description": "Password for the custom user to create (overrides `auth.password`)"
+                                },
+                                "database": {
+                                    "type": "string",
+                                    "default": "guestbook",
+                                    "description": "Name for a custom database to create (overrides `auth.database`)"
+                                }
+                            }
+                        },
+                        "service": {
+                            "type": "object",
+                            "properties": {
+                                "ports": {
+                                    "type": "object",
+                                    "properties": {
+                                        "postgresql": {
+                                            "type": "number",
+                                            "default": 5432,
+                                            "description": "PostgreSQL service port (overrides `service.ports.postgresql`)"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -330,11 +375,6 @@
                     "default": true,
                     "description": "Deploy the PostgreSQL sub-chart"
                 },
-                "usePasswordFile": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Mount the PostgreSQL secret as a file"
-                },
                 "external": {
                     "type": "object",
                     "properties": {
@@ -354,21 +394,6 @@
                             "description": "Password of the external PostgreSQL installation"
                         }
                     }
-                },
-                "existingSecret": {
-                    "type": "string",
-                    "default": "{{ .Release.Name }}-postgresql",
-                    "description": "Use an existing secret file with the PostgreSQL password (can be used with the bundled chart or with an existing installation)"
-                },
-                "postgresqlDatabase": {
-                    "type": "string",
-                    "default": "guestbook",
-                    "description": "Database name to be used by Guestbook"
-                },
-                "postgresqlUsername": {
-                    "type": "string",
-                    "default": "guestbook",
-                    "description": "Username to be created by the PostgreSQL bundled chart"
                 }
             }
         },
