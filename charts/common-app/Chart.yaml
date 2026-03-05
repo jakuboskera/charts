@@ -5,3 +5,6 @@ description: >-
   Used as a single Helm chart for all services in the e-commerce platform.
 type: application
 version: 0.1.0
+maintainers:
+- name: jakuboskera
+  email: iam@jakuboskera.dev

@@ -1,0 +1,6 @@
+image:
+  repository: nginx
+  tag: latest
+
+env:
+  TEST_VAR: "hello"
