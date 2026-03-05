@@ -1,27 +1,42 @@
+## @section Deployment parameters
+
+## @param replicaCount Number of pod replicas
+##
 replicaCount: 1
 
+## @section Image parameters
+
+## @param image.registry Container image registry
+## @param image.repository Container image repository
+## @param image.tag Container image tag
+## @param image.pullPolicy Image pull policy
+##
 image:
   registry: ghcr.io/jakuboskera
   repository: ""
   tag: ""
   pullPolicy: IfNotPresent
 
+## @section Service parameters
+
+## @param service.type Kubernetes Service type
+## @param service.port Port for both Service and container
+##
 service:
   type: ClusterIP
   port: 8080
 
-# Example
-# resources:
-#   limits:
-#     cpu: 100m
-#     memory: 128Mi
-#   requests:
-#     cpu: 50m
-#     memory: 64Mi
+## @section Resource parameters
+
+## @param resources CPU/memory resource requests and limits
+## @extra resources.limits The resources limits for the container
+## @extra resources.requests The resources requests for the container
+##
 resources: {}
 
-# Example:
-# env:
-#   DATABASE_URL: "postgres://localhost:5432/mydb"
-#   LOG_LEVEL: "info"
+## @section Environment variables
+
+## @param env Key-value pairs injected as environment variables via ConfigMap
+## @extra env When non-empty, creates a ConfigMap and mounts it via envFrom
+##
 env: {}

@@ -1,6 +1,11 @@
 image:
+  registry: docker.io/library
   repository: nginx
   tag: latest
+
+service:
+  type: ClusterIP
+  port: 80
 
 env:
   TEST_VAR: "hello"
