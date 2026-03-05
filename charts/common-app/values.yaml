@@ -1,0 +1,27 @@
+replicaCount: 1
+
+image:
+  registry: ghcr.io/jakuboskera
+  repository: ""
+  tag: ""
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
+
+# Example
+# resources:
+#   limits:
+#     cpu: 100m
+#     memory: 128Mi
+#   requests:
+#     cpu: 50m
+#     memory: 64Mi
+resources: {}
+
+# Example:
+# env:
+#   DATABASE_URL: "postgres://localhost:5432/mydb"
+#   LOG_LEVEL: "info"
+env: {}
