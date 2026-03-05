@@ -34,6 +34,32 @@ service:
 ##
 resources: {}
 
+## @section Probes parameters
+
+## @param livenessProbe.httpGet.path Path for the liveness probe HTTP GET request
+## @param livenessProbe.httpGet.port Port for the liveness probe HTTP GET request
+## @param livenessProbe.initialDelaySeconds Initial delay before liveness probe starts
+## @param livenessProbe.periodSeconds How often to perform the liveness probe
+##
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: http
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
+## @param readinessProbe.httpGet.path Path for the readiness probe HTTP GET request
+## @param readinessProbe.httpGet.port Port for the readiness probe HTTP GET request
+## @param readinessProbe.initialDelaySeconds Initial delay before readiness probe starts
+## @param readinessProbe.periodSeconds How often to perform the readiness probe
+##
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: http
+  initialDelaySeconds: 3
+  periodSeconds: 5
+
 ## @section Environment variables
 
 ## @param env Key-value pairs injected as environment variables via ConfigMap
