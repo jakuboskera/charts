@@ -1,0 +1,121 @@
+{
+    "title": "Chart Values",
+    "type": "object",
+    "properties": {
+        "replicaCount": {
+            "type": "number",
+            "default": 1,
+            "description": "Number of pod replicas"
+        },
+        "image": {
+            "type": "object",
+            "properties": {
+                "registry": {
+                    "type": "string",
+                    "default": "ghcr.io/jakuboskera",
+                    "description": "Container image registry"
+                },
+                "repository": {
+                    "type": "string",
+                    "default": "\"\"",
+                    "description": "Container image repository"
+                },
+                "tag": {
+                    "type": "string",
+                    "default": "\"\"",
+                    "description": "Container image tag"
+                },
+                "pullPolicy": {
+                    "type": "string",
+                    "default": "IfNotPresent",
+                    "description": "Image pull policy"
+                }
+            }
+        },
+        "service": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "default": "ClusterIP",
+                    "description": "Kubernetes Service type"
+                },
+                "port": {
+                    "type": "number",
+                    "default": 8080,
+                    "description": "Port for both Service and container"
+                }
+            }
+        },
+        "resources": {
+            "type": "object",
+            "default": "{}",
+            "description": "CPU/memory resource requests and limits"
+        },
+        "livenessProbe": {
+            "type": "object",
+            "properties": {
+                "httpGet": {
+                    "type": "object",
+                    "properties": {
+                        "path": {
+                            "type": "string",
+                            "default": "/healthz",
+                            "description": "Path for the liveness probe HTTP GET request"
+                        },
+                        "port": {
+                            "type": "string",
+                            "default": "http",
+                            "description": "Port for the liveness probe HTTP GET request"
+                        }
+                    }
+                },
+                "initialDelaySeconds": {
+                    "type": "number",
+                    "default": 5,
+                    "description": "Initial delay before liveness probe starts"
+                },
+                "periodSeconds": {
+                    "type": "number",
+                    "default": 10,
+                    "description": "How often to perform the liveness probe"
+                }
+            }
+        },
+        "readinessProbe": {
+            "type": "object",
+            "properties": {
+                "httpGet": {
+                    "type": "object",
+                    "properties": {
+                        "path": {
+                            "type": "string",
+                            "default": "/healthz",
+                            "description": "Path for the readiness probe HTTP GET request"
+                        },
+                        "port": {
+                            "type": "string",
+                            "default": "http",
+                            "description": "Port for the readiness probe HTTP GET request"
+                        }
+                    }
+                },
+                "initialDelaySeconds": {
+                    "type": "number",
+                    "default": 3,
+                    "description": "Initial delay before readiness probe starts"
+                },
+                "periodSeconds": {
+                    "type": "number",
+                    "default": 5,
+                    "description": "How often to perform the readiness probe"
+                }
+            }
+        },
+        "env": {
+            "type": "object",
+            "default": "{}",
+            "description": "Key-value pairs injected as environment variables via ConfigMap"
+        }
+    }
+}

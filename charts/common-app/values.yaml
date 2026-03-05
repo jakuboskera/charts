@@ -1,0 +1,68 @@
+## @section Deployment parameters
+
+## @param replicaCount Number of pod replicas
+##
+replicaCount: 1
+
+## @section Image parameters
+
+## @param image.registry Container image registry
+## @param image.repository Container image repository
+## @param image.tag Container image tag
+## @param image.pullPolicy Image pull policy
+##
+image:
+  registry: ghcr.io/jakuboskera
+  repository: ""
+  tag: ""
+  pullPolicy: IfNotPresent
+
+## @section Service parameters
+
+## @param service.type Kubernetes Service type
+## @param service.port Port for both Service and container
+##
+service:
+  type: ClusterIP
+  port: 8080
+
+## @section Resource parameters
+
+## @param resources CPU/memory resource requests and limits
+## @extra resources.limits The resources limits for the container
+## @extra resources.requests The resources requests for the container
+##
+resources: {}
+
+## @section Probes parameters
+
+## @param livenessProbe.httpGet.path Path for the liveness probe HTTP GET request
+## @param livenessProbe.httpGet.port Port for the liveness probe HTTP GET request
+## @param livenessProbe.initialDelaySeconds Initial delay before liveness probe starts
+## @param livenessProbe.periodSeconds How often to perform the liveness probe
+##
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: http
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
+## @param readinessProbe.httpGet.path Path for the readiness probe HTTP GET request
+## @param readinessProbe.httpGet.port Port for the readiness probe HTTP GET request
+## @param readinessProbe.initialDelaySeconds Initial delay before readiness probe starts
+## @param readinessProbe.periodSeconds How often to perform the readiness probe
+##
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: http
+  initialDelaySeconds: 3
+  periodSeconds: 5
+
+## @section Environment variables
+
+## @param env Key-value pairs injected as environment variables via ConfigMap
+## @extra env When non-empty, creates a ConfigMap and mounts it via envFrom
+##
+env: {}
