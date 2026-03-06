@@ -2,6 +2,19 @@ apiVersion: v1
 entries:
   common-app:
   - apiVersion: v2
+    created: "2026-03-06T10:25:43.665302429Z"
+    description: Generic application chart — Deployment, Service, and optional ConfigMap.
+      Used as a single Helm chart for all services in the e-commerce platform.
+    digest: 7ccf918958718d97d855b2dda7b1b923b82d6218764feb55e20e4b027fe9572d
+    maintainers:
+    - email: iam@jakuboskera.dev
+      name: jakuboskera
+    name: common-app
+    type: application
+    urls:
+    - https://github.com/jakuboskera/charts/releases/download/common-app-0.1.1/common-app-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     created: "2026-03-05T14:32:34.850377367Z"
     description: Generic application chart — Deployment, Service, and optional ConfigMap.
       Used as a single Helm chart for all services in the e-commerce platform.
@@ -299,4 +312,4 @@ entries:
     urls:
     - https://github.com/jakuboskera/charts/releases/download/todo-operator-0.1.0/todo-operator-0.1.0.tgz
     version: 0.1.0
-generated: "2026-03-05T14:32:34.850406692Z"
+generated: "2026-03-06T10:25:43.665337064Z"
