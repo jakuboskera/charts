@@ -7,6 +7,6 @@ dependencies:
   version: 2.36.0
 - name: todo-operator
   repository: https://jakuboskera.github.io/charts
-  version: 0.1.0
-digest: sha256:1f64b6aa6c9cf5f2fb638bf22a875801f676c05f5c5c719423815ddf44ba8525
-generated: "2026-03-02T13:59:03.996872+01:00"
+  version: 0.1.1
+digest: sha256:e8a09adc3395b3be49e98848a74036404b0153b64f1a13726132452d18215206
+generated: "2026-03-14T11:56:38.439935689Z"
