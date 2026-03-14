@@ -117,7 +117,7 @@
                 },
                 "tag": {
                     "type": "string",
-                    "default": "v0.3.0",
+                    "default": "v0.3.3",
                     "description": "Guestbook image tag (immutable tags are recommended)"
                 },
                 "pullPolicy": {
