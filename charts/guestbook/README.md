@@ -136,7 +136,7 @@ Users ────────►│  Guestbook  ├─────────�
 | -------------------------------- | ---------------------------------------------------- | ----------------- |
 | `dbReadiness.image.registry`     | Init container dbReadiness image registry            | `docker.io`       |
 | `dbReadiness.image.repository`   | Init container dbReadiness image repository          | `library/busybox` |
-| `dbReadiness.image.tag`          | Init container dbReadiness image tag                 | `1.33.1`          |
+| `dbReadiness.image.tag`          | Init container dbReadiness image tag                 | `1.37.0`          |
 | `dbReadiness.image.pullPolicy`   | Init container dbReadiness image pull policy         | `IfNotPresent`    |
 | `dbReadiness.image.pullSecrets`  | Init container volume-permissions image pull secrets | `[]`              |
 | `dbReadiness.resources.limits`   | The resources limits for the container               | `{}`              |

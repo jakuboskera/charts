@@ -335,7 +335,7 @@
                         },
                         "tag": {
                             "type": "string",
-                            "default": "1.33.1",
+                            "default": "1.37.0",
                             "description": "Init container dbReadiness image tag"
                         },
                         "pullPolicy": {
