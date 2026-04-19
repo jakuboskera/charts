@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout bitnami-labs/readme-generator-for-helm
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: 'bitnami-labs/readme-generator-for-helm'
           ref: '967764dacee72c05fc5d01c84c13ebb5dab7ac8b'
@@ -37,7 +37,7 @@ jobs:
         run: cd readme-generator-for-helm && npm install
 
       - name: Checkout jakuboskera/charts
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.head_ref }}
           path: charts
