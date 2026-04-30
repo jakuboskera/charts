@@ -60,7 +60,7 @@ jobs:
         run: readme-generator-for-helm/bin/index.js -r $(cat prepared-inputs | grep README) -v $(cat prepared-inputs | grep values) -m $(cat prepared-inputs | grep schema)
 
       - name: Commit files to PR
-        uses: EndBug/add-and-commit@v9
+        uses: EndBug/add-and-commit@v10
         with:
           add: "charts/*/README.md charts/*/values.schema.json"
           cwd: "./charts"
