@@ -4,9 +4,9 @@ dependencies:
   version: 18.4.0
 - name: common
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 2.36.0
+  version: 2.41.0
 - name: todo-operator
   repository: https://jakuboskera.github.io/charts
-  version: 0.1.0
-digest: sha256:1f64b6aa6c9cf5f2fb638bf22a875801f676c05f5c5c719423815ddf44ba8525
-generated: "2026-03-02T13:59:03.996872+01:00"
+  version: 0.1.1
+digest: sha256:a1a974de7b7ea9f8c1ddc126ea97e9f901b810cf20bed0fab24752f00211213f
+generated: "2026-09-12T12:09:31.729573092Z"
