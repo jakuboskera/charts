@@ -1,12 +1,12 @@
 dependencies:
 - name: postgresql
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 18.4.0
+  version: 18.12.4
 - name: common
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 2.36.0
+  version: 2.41.0
 - name: todo-operator
   repository: https://jakuboskera.github.io/charts
   version: 0.1.0
-digest: sha256:1f64b6aa6c9cf5f2fb638bf22a875801f676c05f5c5c719423815ddf44ba8525
-generated: "2026-03-02T13:59:03.996872+01:00"
+digest: sha256:632e0cd3c51e5db9cc2a67b179cf1ee3e0ea7090ad120245434714d17d91ee11
+generated: "2026-10-06T07:22:27.399014394Z"
