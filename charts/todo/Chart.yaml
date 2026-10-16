@@ -20,6 +20,6 @@ dependencies:
   version: 2.x.x
   repository: oci://registry-1.docker.io/bitnamicharts
 - name: todo-operator
-  version: 0.1.0
+  version: 0.1.1
   repository: https://jakuboskera.github.io/charts
   condition: operator.enabled
